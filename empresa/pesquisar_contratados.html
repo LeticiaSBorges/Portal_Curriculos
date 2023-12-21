@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Contratados</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        header a {
+            margin-right: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, font-size 0.3s;
+        }
+
+        header a:hover {
+            color: #ffcc00;
+            font-size: 110%;
+        }
+
+        header img {
+            max-height: 50px;
+            max-width: 100%;
+        }
+
+        header div {
+            display: flex;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2em;
+            margin-left: 10px; /* Adiciona um espaço entre a logo e o texto */
+        }
+
+        main {
+            display: flex;
+            margin-top: 80px; /* Ajuste de margem superior para evitar sobreposição com o cabeçalho fixo */
+        }
+
+        aside {
+            width: 200px;
+            background-color: #333;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+
+        aside a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        aside a:hover {
+            background-color: #555;
+        }
+
+        main section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #222;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            clear: both;
+        }
+
+        #formPesquisa {
+            margin-bottom: 20px;
+        }
+
+        #formPesquisa label,
+        #formPesquisa input,
+        #formPesquisa button {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #formPesquisa input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        #formPesquisa button {
+            padding: 10px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #formPesquisa button:hover {
+            background-color: #777;
+        }
+
+        #resultado-contratados {
+            color: #fff;
+        }
+
+        #resultado-contratados p {
+            margin-top: 0;
+        }
+
+        #resultado-contratados div {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <img src="../imagem/logo.png" alt="Logo IFPA">
+            <h1>Portal de Currículos</h1>
+        </div>
+        <nav>
+            <a href="../index.html">INÍCIO</a>
+            <a href="../sobre.html">SOBRE</a>
+            <a href="../perguntas_frequentes.html">PERGUNTAS FREQUENTES</a>
+            <a href="../login.html">SAIR</a>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <H3 style="text-align: center;">Empresa X</H3>
+            <a href="meu_perfil.html">Meu perfil</a>
+            <a href="notificacao.html">Notificações</a>
+            <a href="guia_cadastro.html">Guia para Cadastrar Estágio</a>
+            <a href="cadastrar_estagio.html">Cadastro Estágio</a>
+            <a href="atualizar_estagio.html">Atualizar Estagio</a>
+            <a href="pesquisar_estagiario.html">Pesquisar Estagiário</a>
+            <a href="cadastrar_contratado.html">Cadastro Contratados</a>
+            <a href="atualizar_contratado.html">Atualizar Contratados</a>
+            <a href="pesquisar_contratados.html">Pesquisar Contratados</a>
+            <!-- Adicione mais links conforme necessário -->
+        </aside>
+
+        <section>
+            <h2>Visualizar Contratados</h2>
+
+            <p>Para cadastrar um novo contratado, siga os passos abaixo:</p>
+
+            <ol>
+                <li>Preencha o nome do aluno no campo "Nome do Aluno".</li>
+                <li>Clique no botão "Pesquisar Contratados".</li>
+                <li>Os contratados correspondentes ao nome informado serão exibidos abaixo.</li>
+            </ol>
+
+            <form id="formPesquisa">
+                <label for="nomeAluno">Nome do Aluno:</label>
+                <input type="text" id="nomeAluno" name="nomeAluno" placeholder="Digite o nome do aluno">
+                <button type="button" onclick="pesquisarContratados()">Pesquisar Contratados</button>
+                <br> <!-- Adiciona um espaçamento -->
+            </form>
+
+            <div id="resultado-contratados">
+                <!-- Aqui serão exibidos os resultados dos contratados -->
+                <!-- Pode ser populado dinamicamente com JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        © 2023 Portal de Currículos - IFPA. Todos os direitos reservados.
+    </footer>
+
+    <script>
+        // Simulação de resultados fictícios
+        const contratados = [
+            { nome: "João Silva", matricula: "12345", email: "joao@email.com", tempo_contrato: 12 },
+            { nome: "Maria Oliveira", matricula: "67890", email: "maria@email.com", tempo_contrato: 24 },
+            { nome: "Carlos Santos", matricula: "54321", email: "carlos@email.com", tempo_contrato: 18 }
+        ];
+
+        // Exibe todos os contratados ao abrir a página
+        exibirContratados(contratados);
+
+        function pesquisarContratados() {
+            const nomePesquisa = document.getElementById("nomeAluno").value.toLowerCase();
+            const contratadosFiltrados = contratados.filter(contratado =>
+                contratado.nome.toLowerCase().includes(nomePesquisa)
+            );
+
+            // Exibe apenas os contratados filtrados
+            exibirContratados(contratadosFiltrados);
+        }
+
+        function exibirContratados(listaContratados) {
+            const resultadoContratados = document.getElementById("resultado-contratados");
+            resultadoContratados.innerHTML = ""; // Limpa resultados anteriores
+
+            if (listaContratados.length > 0) {
+                listaContratados.forEach(contratado => {
+                    const divContratado = document.createElement("div");
+                    divContratado.innerHTML = `
+                        <strong>Nome:</strong> ${contratado.nome}<br>
+                        <strong>Matrícula:</strong> ${contratado.matricula}<br>
+                        <strong>Email:</strong> ${contratado.email}<br>
+                        <strong>Tempo de Contrato (em meses):</strong> ${contratado.tempo_contrato}<br><br>
+                    `;
+                    resultadoContratados.appendChild(divContratado);
+                });
+            } else {
+                resultadoContratados.innerHTML = "<p>Nenhum contratado encontrado.</p>";
+            }
+        }
+    </script>
+</body>
+</html>

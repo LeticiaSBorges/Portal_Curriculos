@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Currículo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        header a {
+            margin-right: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, font-size 0.3s;
+        }
+
+        header a:hover {
+            color: #ffcc00;
+            font-size: 110%;
+        }
+
+        header img {
+            max-height: 50px;
+            max-width: 100%;
+        }
+
+        header div {
+            display: flex;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2em;
+            margin-left: 10px; /* Adiciona um espaço entre a logo e o texto */
+        }
+
+        main {
+            display: flex;
+            margin-top: 80px; /* Ajuste de margem superior para evitar sobreposição com o cabeçalho fixo */
+        }
+
+        aside {
+            width: 200px;
+            background-color: #333;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+
+        aside a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        aside a:hover {
+            background-color: #555;
+        }
+
+        main section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #222;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 8px;
+            margin-bottom: 15px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #777;
+        }
+
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            clear: both;
+        }
+
+        /* Adicione destaque visual aos títulos */
+        label[for="experiencia"],
+        label[for="educacao"],
+        label[for="cursos"] {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        /* Estilo para itens da lista de vagas */
+        #listaVagas {
+            list-style-type: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        #listaVagas li {
+            margin-bottom: 5px;
+            background-color: #444;
+            padding: 5px;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        #listaVagas li:hover {
+            background-color: #666;
+        }
+    </style>
+
+
+</head>
+<body>
+
+    <header>
+        <div>
+            <img src="../imagem/logo.png" alt="Logo IFPA">
+            <h1>Portal de Currículos</h1>
+        </div>
+        <nav>
+            <a href="../index.html">INÍCIO</a>
+            <a href="../sobre.html">SOBRE</a>
+            <a href="../perguntas_frequentes.html">PERGUNTAS FREQUENTES</a>
+            <a href="../login.html">SAIR</a>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <H3 style="text-align: center;">Empresa X</H3>
+            <a href="meu_perfil.html">Meu perfil</a>
+            <a href="notificacao.html">Notificações</a>
+            <a href="guia_cadastro.html">Guia para Cadastrar Estágio</a>
+            <a href="cadastrar_estagio.html">Cadastro Estágio</a>
+            <a href="atualizar_estagio.html">Atualizar Estagio</a>
+            <a href="pesquisar_estagiario.html">Pesquisar Estagiário</a>
+            <a href="cadastrar_contratado.html">Cadastro Contratados</a>
+            <a href="atualizar_contratado.html">Atualizar Contratados</a>
+            <a href="pesquisar_contratados.html">Pesquisar Contratados</a>
+            <!-- Adicione mais links conforme necessário -->
+        </aside>
+
+        <section>
+            <h2>Cadastro de Vaga de Estágio</h2>
+        
+            <p>Escolha uma vaga da lista abaixo para preencher automaticamente os campos do formulário:</p>
+        
+            <!-- Lista de vagas -->
+            <ul id="listaVagas">
+                <li onclick="preencherCampos('Desenvolvedor Web', 'Análise e Desenvolvimento de Sistemas', '6', 'Empresa ABC', ['HTML', 'CSS'], ['Curso A', 'Curso B'])">Desenvolvedor Web</li>
+                <li onclick="preencherCampos('Analista de Dados', 'Ciência de Dados', '12', 'Empresa XYZ', ['Python', 'SQL'], ['Curso C', 'Curso D'])">Analista de Dados</li>
+                <li onclick="preencherCampos('Engenheiro de Software', 'Engenharia de Software', '8', 'Empresa 123', ['Java', 'C#'], ['Curso E', 'Curso F'])">Engenheiro de Software</li>
+                <!-- Adicione mais vagas conforme necessário -->
+            </ul>
+        
+            <form id="cadastroForm">
+                <label for="nome_vaga">Nome da Vaga:</label>
+                <input type="text" id="nome_vaga" name="nome_vaga" required>
+        
+                <label for="curso">Curso:</label>
+                <input type="text" id="curso" name="curso" value="Análise e Desenvolvimento de Sistemas" readonly>
+        
+                <label for="tempo_contrato">Tempo de Contrato (em meses):</label>
+                <input type="number" id="tempo_contrato" name="tempo_contrato" required>
+        
+                <label for="nome_empresa">Nome da Empresa:</label>
+                <input type="text" id="nome_empresa" name="nome_empresa" required>
+        
+                <label for="habilidades_desejaveis">Habilidades Desejáveis:</label>
+                <div id="habilidades-container">
+                    <button type="button" onclick="adicionarHabilidade()">Adicionar Habilidade</button>
+                </div>
+        
+                <label for="curso_desejavel">Curso Desejável:</label>
+                <div id="cursos-container">
+                    <button type="button" onclick="adicionarCursoDesejavel()">Adicionar Curso Desejável</button>
+                </div>
+        
+                <input type="submit" value="Cadastrar Estágio">
+            </form>
+        
+            <!-- Div para exibir os campos preenchidos automaticamente -->
+            <div id="dadosPreenchidos"></div>
+        </section>
+    </main>
+
+    <footer>
+        © 2023 Portal de Currículos - IFPA. Todos os direitos reservados.
+    </footer>
+
+    <script>
+        function preencherCampos(nomeVaga, curso, tempoContrato, nomeEmpresa, habilidades, cursos) {
+            document.getElementById("nome_vaga").value = nomeVaga;
+            document.getElementById("curso").value = curso;
+            document.getElementById("tempo_contrato").value = tempoContrato;
+            document.getElementById("nome_empresa").value = nomeEmpresa;
+
+            // Limpa as listas de habilidades e cursos
+            document.getElementById("habilidades-container").innerHTML = '';
+            document.getElementById("cursos-container").innerHTML = '';
+
+            // Adiciona as habilidades preenchidas automaticamente
+            habilidades.forEach(habilidade => adicionarHabilidade(habilidade));
+
+            // Adiciona os cursos preenchidos automaticamente
+            cursos.forEach(curso => adicionarCursoDesejavel(curso));
+        }
+
+        // (Funções adicionais permanecem inalteradas)
+
+        // Adicionando um listener para o evento submit do formulário
+        document.getElementById("cadastroForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            // Obtém os dados do formulário
+            const nomeVaga = document.getElementById("nome_vaga").value;
+            const curso = document.getElementById("curso").value;
+            const tempoContrato = document.getElementById("tempo_contrato").value;
+            const nomeEmpresa = document.getElementById("nome_empresa").value;
+            const habilidadesDesejaveis = Array.from(document.getElementsByName("habilidades_desejaveis[]")).map(input => input.value);
+            const cursosDesejaveis = Array.from(document.getElementsByName("curso_desejavel[]")).map(input => input.value);
+
+            // Exibe os dados na div correspondente
+            const dadosPreenchidosDiv = document.getElementById("dadosPreenchidos");
+            dadosPreenchidosDiv.innerHTML = `
+                <h2>Detalhes da Vaga Cadastrada:</h2>
+                <p><strong>Nome da Vaga:</strong> ${nomeVaga}</p>
+                <p><strong>Curso:</strong> ${curso}</p>
+                <p><strong>Tempo de Contrato:</strong> ${tempoContrato} meses</p>
+                <p><strong>Nome da Empresa:</strong> ${nomeEmpresa}</p>
+
+                <h3>Habilidades Desejáveis:</h3>
+                ${habilidadesDesejaveis.map(habilidade => `<p>${habilidade}</p>`).join('')}
+
+                <h3>Cursos Desejáveis:</h3>
+                ${cursosDesejaveis.map(cursoDesejavel => `<p>${cursoDesejavel}</p>`).join('')}
+            `;
+        });
+    </script>
+
+</body>
+</html>

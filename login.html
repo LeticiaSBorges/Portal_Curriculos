@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            overflow-y: scroll;
+            background: #c1bdba;
+            font-family: 'Titillium Web', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+            transition: .5s ease;
+        }
+
+        a:hover {
+            color: #117a65;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header a {
+            margin-right: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, font-size 0.3s;
+        }
+
+        header a:hover {
+            color: #ffcc00;
+            font-size: 110%;
+        }
+
+        header img {
+            max-height: 50px;
+            max-width: 100%;
+        }
+
+        header div {
+            display: flex;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2em;
+            margin-left: 10px;
+        }
+
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            clear: both;
+        }
+
+        .form {
+            background: rgba(19, 35, 47, 0.9);
+            padding: 40px;
+            max-width: 600px;
+            margin: 40px auto;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+        }
+
+        .tab-group {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+            padding-bottom: 20px;
+        }
+
+        .tab-group li {
+            display: inline-block;
+        }
+
+        .tab-group li a {
+            display: block;
+            text-decoration: none;
+            padding: 15px;
+            background: rgba(160, 179, 176, 0.25);
+            color: #a0b3b0;
+            font-size: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: .5s ease;
+            width: 250px;
+        }
+
+        .tab-group li a:hover {
+            background: #117a65;
+            color: #ffffff;
+        }
+
+        .tab-group .active a {
+            background: #1ab188;
+            color: #ffffff;
+        }
+
+        .tab-content>div:last-child {
+            display: none;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            font-weight: 300;
+            margin: 0 0 40px;
+        }
+
+        label {
+            position: absolute;
+            transform: translateY(6px);
+            left: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            transition: all 0.25s ease;
+            pointer-events: none;
+            font-size: 22px;
+        }
+
+        label .req {
+            margin: 2px;
+            color: #1ab188;
+        }
+
+        label.active {
+            transform: translateY(50px);
+            left: 2px;
+            font-size: 14px;
+        }
+
+        label.highlight {
+            color: #ffffff;
+        }
+
+        input,
+        textarea {
+            font-size: 22px;
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 5px 10px;
+            background: none;
+            background-image: none;
+            border: 1px solid #a0b3b0;
+            color: #ffffff;
+            border-radius: 0;
+            transition: border-color .25s ease, box-shadow .25s ease;
+        }
+
+        input:focus {
+            outline: 0;
+            border-color: #1ab188;
+        }
+
+        textarea {
+            border: 2px solid #a0b3b0;
+            resize: vertical;
+        }
+
+        .field-wrap {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .field-wrap select {
+            font-size: 16px;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #a0b3b0;
+            border-radius: 4px;
+            background: none;
+            color: #ffffff;
+        }
+
+        .field-wrap select:focus {
+            outline: 0;
+            border-color: #1ab188;
+            background: #555;
+        }
+
+        .field-wrap label {
+            position: relative;
+        }
+
+        .field-wrap label:after {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #a0b3b0;
+        }
+
+        .field-wrap select:focus+label:after {
+            color: #1ab188;
+        }
+
+        .top-row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .top-row>div {
+            float: left;
+            width: 48%;
+            margin-right: 4%;
+        }
+
+        .top-row>div:last-child {
+            margin: 0;
+        }
+
+        .button {
+            border: 0;
+            outline: none;
+            border-radius: 0;
+            padding: 15px 0;
+            font-size: 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            background: #1ab188;
+            color: #ffffff;
+            transition: all .5s ease;
+        }
+
+        .button:hover,
+        .button:focus {
+            background: #117a65;
+        }
+
+        .button-block {
+            display: block;
+            width: 100%;
+        }
+
+        .forgot {
+            margin-top: -20px;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- Logo e texto -->
+        <div>
+            <img src="imagem/logo.png" alt="Logo IFPA">
+            <h1>Portal de Currículos</h1>
+        </div>
+
+        <!-- Links do menu -->
+        <nav>
+            <a href="index.html">INICIO</a>
+            <a href="sobre.html">SOBRE</a>
+            <a href="perguntas_frequentes.html">PERGUNTAS FREQUENTES</a>
+            <a href="login.html">LOGIN</a>
+        </nav>
+    </header>
+
+    <div class="form">
+
+        <ul class="tab-group">
+            <li class="tab active"><a href="#signup">Inscrever-se</a></li>
+            <li class="tab"><a href="#login">Conecte-se</a></li>
+
+        </ul>
+
+        <div class="tab-content">
+            <div id="signup">
+
+                <h1>Inscreva-se gratuitamente</h1>
+
+                <form action="/" method="post">
+
+                    <div class="top-row">
+                        <div class="field-wrap">
+                            <label>
+                                Primeiro Nome<span class="req">*</span>
+                            </label>
+                            <input type="text" required autocomplete="off" />
+                        </div>
+
+                        <div class="field-wrap">
+                            <label>
+                                Último Nome<span class="req">*</span>
+                            </label>
+                            <input type="text" required autocomplete="off" />
+                        </div>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            E-mail<span class="req">*</span>
+                        </label>
+                        <input type="email" required autocomplete="off" />
+                    </div>
+
+                    <!-- Adição do campo de matrícula -->
+                    <div class="field-wrap">
+                        <label>
+                            Matrícula<span class="req">*</span>
+                        </label>
+                        <input type="text" id="matricula" pattern="\d+" required autocomplete="off" />
+                    </div>
+
+                    <!-- Adição do menu suspenso para o tipo de usuário -->
+                    <div class="field-wrap">
+                        <label>
+                            Tipo de Usuário<span class="req">*</span>
+                        </label>
+                        <select required>
+                            <option value="aluno">Aluno</option>
+                            <option value="professor">Professor</option>
+                            <option value="administrador">Administrador</option>
+                            <option value="Empresa">Empresa</option>
+                        </select>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Defina uma senha<span class="req">*</span>
+                        </label>
+                        <input type="password" required autocomplete="off" />
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Confirme a senha<span class="req">*</span>
+                        </label>
+                        <input type="password" required autocomplete="off" />
+                    </div>
+
+                    <button type="submit" class="button button-block">Cadastrar</button>
+
+                </form>
+
+            </div>
+
+            <div id="login">
+                <h1>Bem vindo de volta!</h1>
+
+                <form action="/" method="post">
+
+                    <div class="field-wrap">
+                        <label>
+                            E-mail<span class="req">*</span>
+                        </label>
+                        <input type="email" required autocomplete="off" />
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Senha<span class="req">*</span>
+                        </label>
+                        <input type="password" required autocomplete="off" />
+                    </div>
+
+                    <p class="forgot"><a href="#">Esqueceu sua senha?</a></p>
+
+                    <button class="button button-block"><a href="aluno/guia_cadastro.html">Entrar</a></button>
+
+                </form>
+
+            </div>
+
+        </div><!-- tab-content -->
+
+    </div> <!-- /form -->
+
+    <footer>
+        <!-- Rodapé padrão -->
+        © 2023 Portal de Currículos - IFPA. Todos os direitos reservados.
+    </footer>
+
+    <script>
+        // Adicionando jQuery
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector('.form').addEventListener('keyup', function (e) {
+                var target = e.target,
+                    label = target.previousElementSibling,
+                    req = label.querySelector('.req'),
+                    isValid = false;
+
+                if (target.type === 'email') {
+                    isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(target.value);
+                } else {
+                    isValid = target.value !== '';
+                }
+
+                if (isValid) {
+                    label.classList.add('active', 'highlight');
+                    req.style.opacity = '0';
+                } else {
+                    label.classList.remove('highlight');
+                    if (target.value === '') {
+                        req.style.opacity = '1';
+                    } else {
+                        req.style.opacity = '0';
+                    }
+                }
+            });
+
+            document.querySelectorAll('.tab a').forEach(function (tab) {
+                tab.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    var parentLi = tab.parentElement;
+                    parentLi.classList.add('active');
+                    var siblings = Array.from(parentLi.parentElement.children).filter(function (el) {
+                        return el !== parentLi;
+                    });
+                    siblings.forEach(function (el) {
+                        el.classList.remove('active');
+                    });
+
+                    var target = tab.getAttribute('href');
+                    document.querySelectorAll('.tab-content > div').forEach(function (div) {
+                        if ('#' + div.id === target) {
+                            div.style.display = 'block';
+                        } else {
+                            div.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</body>
+
+</html>

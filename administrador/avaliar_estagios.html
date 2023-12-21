@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação de Estágios</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        header a {
+            margin-right: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, font-size 0.3s;
+        }
+
+        header a:hover {
+            color: #ffcc00;
+            font-size: 110%;
+        }
+
+        header img {
+            max-height: 50px;
+            max-width: 100%;
+        }
+
+        header div {
+            display: flex;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2em;
+            margin-left: 10px; 
+        }
+
+        main {
+            display: flex;
+            margin-top: 80px;
+        }
+
+        aside {
+            width: 200px;
+            background-color: #333;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+
+        aside a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        aside a:hover {
+            background-color: #555;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #222;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #fff;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #555;
+            color: #fff;
+        }
+
+        tr:hover {
+            background-color: #444;
+        }
+
+        section#dados-cadastrados {
+            max-width: 650px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #333;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        section#dados-cadastrados h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        section#dados-cadastrados p {
+            margin-bottom: 10px;
+        }
+
+        main {
+            flex-direction: column;
+        }
+
+        section {
+            width: 100%;
+        }
+
+        section#comentarios {
+            max-width: 650px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #333;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        section#comentarios h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        section#comentarios textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        section#comentarios button {
+            padding: 8px;
+            margin-bottom: 15px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        section#comentarios button:hover {
+            background-color: #777;
+        }
+
+        section#lista-comentarios {
+            max-width: 650px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #333;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        section#lista-comentarios h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        ul#lista {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li.comment {
+            border: 1px solid #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        li.comment button {
+            background-color: #555;
+            color: #fff;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        li.comment button:hover {
+            background-color: #777;
+        }
+
+        #filtro_nome,
+        #filtro_habilidade {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        
+        /* Estilo da caixa de pesquisa */
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #222;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <img src="../imagem/logo.png" alt="Logo IFPA">
+            <h1>Portal de Currículos</h1>
+        </div>
+        <nav>
+            <a href="../index.html">INÍCIO</a>
+            <a href="../sobre.html">SOBRE</a>
+            <a href="../perguntas_frequentes.html">PERGUNTAS FREQUENTES</a>
+            <a href="../login.html">SAIR</a>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <H3 style="text-align: center;">Administrador X</H3>
+            <a href="meu_perfil.html">Meu perfil</a>
+            <a href="avaliar_curriculo.html">Avaliar Currículos</a>
+            <a href="avaliar_estagios.html">Avaliar Estágios</a>
+            <!-- Adicione mais links conforme necessário -->
+        </aside>
+
+        <section>
+            <h2>Avaliação de Estágios</h2>
+
+             <!-- Adicione os campos de filtro -->
+            <label for="filtro_nome">Filtrar por Nome da Vaga:</label>
+            <input type="text" id="filtro_nome" oninput="filtrarPorNome()" />
+
+            <label for="filtro_empresa">Filtrar por Nome da Empresa:</label>
+            <input type="text" id="filtro_empresa" oninput="filtrarPorEmpresa()" />
+
+
+            <table>
+                <tr>
+                    <td>Analista e Desenvolvedor de Dados</td>
+                    <td>Ciência da Computação</td>
+                    <td>12</td>
+                    <td>Empresa ABC</td>
+                    <td>SQL, Python, Estatística</td>
+                    <td>Ciência da Computação</td>
+                    <td>
+                        <select>
+                            <option value="Aprovado">Aprovado</option>
+                            <option value="Reprovado">Reprovado</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>Analista e Desenvolvedor de Dados</td>
+                    <td>Design Gráfico</td>
+                    <td>8</td>
+                    <td>Design Studio</td>
+                    <td>Adobe Illustrator, Photoshop</td>
+                    <td>Design Gráfico</td>
+                    <td>
+                        <select>
+                            <option value="Aprovado">Aprovado</option>
+                            <option value="Reprovado">Reprovado</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>Analista e Desenvolvedor de Dados</td>
+                    <td>Engenharia de Software</td>
+                    <td>10</td>
+                    <td>Tech Innovations</td>
+                    <td>Java, Spring, React</td>
+                    <td>Engenharia de Software</td>
+                    <td>
+                        <select>
+                            <option value="Aprovado">Aprovado</option>
+                            <option value="Reprovado">Reprovado</option>
+                        </select>
+                    </td>
+                </tr>
+                <!-- Adicione mais vagas fictícias conforme necessário -->
+            </table>
+        </section>
+
+        <section id="dados-cadastrados">
+            <h2>Dados Cadastrados</h2>
+            <!-- Dados fictícios -->
+            <p><strong>Nome da Vaga:</strong> <span id="nome"></span></p>
+            <p><strong>Nome da Empresa:</strong> <span id="nome-empresa"></span></p>
+            <p><strong>Curso Desejável:</strong> <span id="curso-desejavel"></span></p>
+            <p><strong>Habilidades Desejáveis:</strong> <span id="habilidades"></span></p>
+            <p><strong>Tempo de Contrato:</strong> <span id="tempo-contrato"></span></p>
+            <p><strong>Email:</strong> <span id="email">email_estagiario123@example.com</span></p>
+        </section>
+
+        <section id="comentarios">
+            <!-- Seção de comentários pode ser copiada do código fornecido -->
+            <h2>Adicionar Comentário</h2>
+            <textarea id="comentario" rows="4" placeholder="Digite seu comentário"></textarea>
+            <button onclick="adicionarComentario()">Enviar</button>
+            <button onclick="limparComentario()">Cancelar</button>
+        </section>
+
+        <section id="lista-comentarios">
+            <!-- Seção de lista de comentários pode ser copiada do código fornecido -->
+            <h2>Lista de Comentários</h2>
+            <ul id="lista">
+                <!-- Comentários serão adicionados dinamicamente aqui -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Rodapé pode ser copiado do código fornecido -->
+        © 2023 Portal de Currículos - IFPA. Todos os direitos reservados.
+    </footer>
+
+    <!-- ... (Código HTML anterior) ... -->
+
+    <script>
+    // Função para adicionar comentário
+    function adicionarComentario() {
+        const comentario = document.getElementById("comentario").value;
+
+        if (comentario.trim() !== "") {
+            const lista = document.getElementById("lista");
+            const novoComentario = document.createElement("li");
+            novoComentario.className = "comment";
+            novoComentario.innerHTML = `
+                <p>${comentario}</p>
+                <button onclick="editarComentario(this)">Editar</button>
+                <button onclick="excluirComentario(this)">Excluir</button>
+            `;
+            lista.appendChild(novoComentario);
+
+            // Limpar a caixa de comentários após adicionar
+            limparComentario();
+        }
+    }
+
+    // Função para limpar a caixa de comentários
+    function limparComentario() {
+        document.getElementById("comentario").value = "";
+    }
+
+    // Função para editar comentário
+    function editarComentario(botao) {
+        const paragrafo = botao.parentNode.firstChild;
+        const novoComentario = prompt("Editar comentário:", paragrafo.innerText);
+
+        if (novoComentario !== null && novoComentario.trim() !== "") {
+            paragrafo.innerText = novoComentario;
+        }
+    }
+
+    // Função para excluir comentário
+    function excluirComentario(botao) {
+        const confirmacao = confirm("Deseja realmente excluir este comentário?");
+
+        if (confirmacao) {
+            const lista = document.getElementById("lista");
+            lista.removeChild(botao.parentNode);
+        }
+    }
+
+    // Função para preencher a seção "dados-cadastrados" com os dados da linha selecionada
+    function preencherDadosCadastrados(nomeVaga, nomeEmpresa, cursoDesejavel, habilidadesDesejaveis, tempoContrato) {
+        // Preencher os campos
+        document.getElementById("nome").innerText = nomeVaga;
+        document.getElementById("nome-empresa").innerText = nomeEmpresa;
+        document.getElementById("curso-desejavel").innerText = cursoDesejavel;
+        document.getElementById("habilidades").innerText = habilidadesDesejaveis;
+        document.getElementById("tempo-contrato").innerText = tempoContrato;
+
+        // Restante do código permanece inalterado
+
+        // Exibir a seção "dados-cadastrados"
+        document.getElementById("dados-cadastrados").style.display = "block";
+    }
+
+    // Adicionar evento de clique às linhas da tabela
+    const linhasTabela = document.querySelectorAll("table tr");
+    linhasTabela.forEach((linha) => {
+        linha.addEventListener("click", () => {
+            // Obter dados da linha
+            const nomeVaga = linha.cells[0].innerText;
+            const cursoDesejavel = linha.cells[1].innerText;
+            const habilidadesDesejaveis = linha.cells[2].innerText.split(", ").join(", "); // Tratar as habilidades
+            const tempoContrato = linha.cells[3].innerText;
+            const nomeEmpresa = linha.cells[4].innerText;
+
+            // Preencher a seção "dados-cadastrados" com os dados da linha selecionada
+            preencherDadosCadastrados(nomeVaga, nomeEmpresa, cursoDesejavel, habilidadesDesejaveis, tempoContrato);
+        });
+    });
+
+    // Função para filtrar a tabela por nome
+    function filtrarPorNome() {
+        const inputNome = document.getElementById("filtro_nome");
+        const filtro = inputNome.value.toUpperCase();
+        const tabela = document.querySelector("table");
+        const linhas = tabela.querySelectorAll("tr");
+
+        // Itera sobre as linhas da tabela (ignora a primeira, que é a cabeçalho)
+        for (let i = 1; i < linhas.length; i++) {
+            const colunaNome = linhas[i].getElementsByTagName("td")[0];
+
+            // Verifica se o texto na coluna de nome contém o filtro
+            if (colunaNome) {
+                const textoNome = colunaNome.textContent || colunaNome.innerText;
+                if (textoNome.toUpperCase().indexOf(filtro) > -1) {
+                    linhas[i].style.display = "";
+                } else {
+                    linhas[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    // Função para filtrar a tabela por habilidades
+    function filtrarPorHabilidades() {
+        const inputHabilidades = document.getElementById("filtro_habilidade");
+        const filtroHabilidades = inputHabilidades.value.toUpperCase();
+        const tabela = document.querySelector("table");
+        const linhas = tabela.querySelectorAll("tr");
+
+        // Itera sobre as linhas da tabela (ignora a primeira, que é a cabeçalho)
+        for (let i = 1; i < linhas.length; i++) {
+            const colunaHabilidades = linhas[i].getElementsByTagName("td")[2];
+
+            // Verifica se o texto na coluna de habilidades contém o filtro
+            if (colunaHabilidades) {
+                const textoHabilidades = colunaHabilidades.textContent || colunaHabilidades.innerText;
+                if (textoHabilidades.toUpperCase().indexOf(filtroHabilidades) > -1) {
+                    linhas[i].style.display = "";
+                } else {
+                    linhas[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    // Função para filtrar a tabela por nome
+    function filtrarPorNome() {
+        const inputNome = document.getElementById("filtro_nome");
+        const filtro = inputNome.value.toUpperCase();
+        const tabela = document.querySelector("table");
+        const linhas = tabela.querySelectorAll("tr");
+
+        // Itera sobre as linhas da tabela (ignora a primeira, que é a cabeçalho)
+        for (let i = 1; i < linhas.length; i++) {
+            const colunaNome = linhas[i].getElementsByTagName("td")[0];
+
+            // Verifica se o texto na coluna de nome contém o filtro
+            if (colunaNome) {
+                const textoNome = colunaNome.textContent || colunaNome.innerText;
+                if (textoNome.toUpperCase().indexOf(filtro) > -1) {
+                    linhas[i].style.display = "";
+                } else {
+                    linhas[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    // Função para filtrar a tabela por empresa
+    function filtrarPorEmpresa() {
+        const inputEmpresa = document.getElementById("filtro_empresa");
+        const filtro = inputEmpresa.value.toUpperCase();
+        const tabela = document.querySelector("table");
+        const linhas = tabela.querySelectorAll("tr");
+
+        // Itera sobre as linhas da tabela (ignora a primeira, que é a cabeçalho)
+        for (let i = 1; i < linhas.length; i++) {
+            const colunaEmpresa = linhas[i].getElementsByTagName("td")[3];
+
+            // Verifica se o texto na coluna de empresa contém o filtro
+            if (colunaEmpresa) {
+                const textoEmpresa = colunaEmpresa.textContent || colunaEmpresa.innerText;
+                if (textoEmpresa.toUpperCase().indexOf(filtro) > -1) {
+                    linhas[i].style.display = "";
+                } else {
+                    linhas[i].style.display = "none";
+                }
+            }
+        }
+    }
+    </script>
+
+<!-- ... (Código HTML posterior) ... -->
+
+
+</body>
+
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Currículo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        header a {
+            margin-right: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, font-size 0.3s;
+        }
+
+        header a:hover {
+            color: #ffcc00;
+            font-size: 110%;
+        }
+
+        header img {
+            max-height: 50px;
+            max-width: 100%;
+        }
+
+        header div {
+            display: flex;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2em;
+            margin-left: 10px; /* Adiciona um espaço entre a logo e o texto */
+        }
+
+        main {
+            display: flex;
+            margin-top: 80px; /* Ajuste de margem superior para evitar sobreposição com o cabeçalho fixo */
+        }
+
+        aside {
+            width: 200px;
+            background-color: #333;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+
+        aside a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        aside a:hover {
+            background-color: #555;
+        }
+
+        main section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #222;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 8px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #777;
+        }
+
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            clear: both;
+        }
+
+        /* Adiciona destaque visual aos títulos */
+        label[for="experiencia"],
+        label[for="educacao"],
+        label[for="cursos"] {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <img src="../imagem/logo.png" alt="Logo IFPA">
+            <h1>Portal de Currículos</h1>
+        </div>
+        <nav>
+            <a href="../index.html">INÍCIO</a>
+            <a href="../sobre.html">SOBRE</a>
+            <a href="../perguntas_frequentes.html">PERGUNTAS FREQUENTES</a>
+            <a href="../login.html">SAIR</a>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <H3 style="text-align: center;">Empresa X</H3>
+            <a href="meu_perfil.html">Meu perfil</a>
+            <a href="notificacao.html">Notificações</a>
+            <a href="guia_cadastro.html">Guia para Cadastrar Estágio</a>
+            <a href="cadastrar_estagio.html">Cadastro Estágio</a>
+            <a href="atualizar_estagio.html">Atualizar Estagio</a>
+            <a href="pesquisar_estagiario.html">Pesquisar Estagiário</a>
+            <a href="cadastrar_contratado.html">Cadastro Contratados</a>
+            <a href="atualizar_contratado.html">Atualizar Contratados</a>
+            <a href="pesquisar_contratados.html">Pesquisar Contratados</a>
+            <!-- Adicione mais links conforme necessário -->
+        </aside>
+
+        <section>
+            <h2>Meu Perfil</h2>
+
+            <form action="processar_atualizacao.php" method="post">
+
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required value="Empresa X">
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required value="empresax@example.com">
+
+                <label for="matricula">Matrícula:</label>
+                <input type="text" id="matricula" name="matricula" required value=" ">
+
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone" placeholder="(99) 99999-9999">
+
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" name="endereco">
+
+                <label for="bairro">Bairro:</label>
+                <input type="text" id="bairro" name="bairro">
+
+                <label for="cidade">Cidade:</label>
+                <input type="text" id="cidade" name="cidade">
+
+                <label for="estado">Estado:</label>
+                <input type="text" id="estado" name="Estado">
+
+                <label for="cep">CEP:</label>
+                <input type="text" id="cep" name="cep">
+
+                <label for="admininstrador">Nome do Admininstrador:</label>
+                <input type="text" id="admininstrador" name="admininstrador">
+
+                <label for="dataNascimento">Data de Nascimento:</label>
+                <input type="date" id="dataNascimento" name="dataNascimento" required value="1990-01-01">
+
+                <label for="genero">Gênero:</label>
+                <select id="genero" name="genero">
+                    <option value="masculino">Masculino</option>
+                    <option value="feminino">Feminino</option>
+                    <option value="outro">Outro</option>
+                </select>
+
+                <label for="setor">Setor:</label>
+                <input type="text" id="setor" name="setor">
+
+                <label for="funcao">Função:</label>
+                <input type="text" id="funcao" name="funcao">
+
+                </select>
+
+                <!-- Adicione outros campos conforme necessário -->
+
+                <input type="submit" value="Atualizar Perfil">
+
+            </form>
+
+    </main>
+
+    <footer>
+        © 2023 Portal de Currículos - IFPA. Todos os direitos reservados.
+    </footer>
+
+    <script>
+        function adicionarExperiencia() {
+            const experienciaContainer = document.getElementById("experiencia-container");
+
+            const novaExperiencia = document.createElement("div");
+
+            novaExperiencia.innerHTML = `
+                <label for="nome_empresa">Nome da Empresa:</label>
+                <input type="text" name="nome_empresa[]" required>
+
+                <label for="cargo">Cargo:</label>
+                <input type="text" name="cargo[]" required>
+
+                <label for="tempo_experiencia">Tempo de Experiência em Anos:</label>
+                <input type="number" name="tempo_experiencia[]" required>
+
+                <label for="principais_funcoes">Principais Funções:</label>
+                <textarea name="principais_funcoes[]" rows="4"></textarea>
+            `;
+
+            experienciaContainer.appendChild(novaExperiencia);
+        }
+
+        function adicionarEducacao() {
+            const educacaoContainer = document.getElementById("educacao-container");
+
+            const novaEducacao = document.createElement("div");
+
+            novaEducacao.innerHTML = `
+                <label for="faculdade">Faculdade/Universidade:</label>
+                <input type="text" name="faculdade[]" required>
+
+                <label for="curso">Curso:</label>
+                <input type="text" name="curso[]" required>
+
+                <label for="duracao_curso">Duração em Anos:</label>
+                <input type="number" name="duracao_curso[]" required>
+
+                <label for="inicio_fim_curso">Início e Fim do Curso:</label>
+                <input type="text" name="inicio_fim_curso[]" placeholder="Ex: 2018 - 2022" required>
+            `;
+
+            educacaoContainer.appendChild(novaEducacao);
+        }
+
+        function adicionarCurso() {
+            const cursosContainer = document.getElementById("cursos-container");
+
+            const novoCurso = document.createElement("div");
+
+            novoCurso.innerHTML = `
+                <label for="nome_curso">Nome do Curso:</label>
+                <input type="text" name="nome_curso[]" required>
+
+                <label for="duracao_curso">Duração em Horas:</label>
+                <input type="number" name="duracao_curso[]" required>
+
+                <label for="status_curso">Status:</label>
+                <select name="status_curso[]">
+                    <option value="Concluído">Concluído</option>
+                    <option value="Em Andamento">Em Andamento</option>
+                </select>
+            `;
+
+            cursosContainer.appendChild(novoCurso);
+        }
+    </script>
+
+</body>
+</html>

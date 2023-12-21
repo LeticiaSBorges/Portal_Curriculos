@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa de Estagiários</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        header a {
+            margin-right: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, font-size 0.3s;
+        }
+
+        header a:hover {
+            color: #ffcc00;
+            font-size: 110%;
+        }
+
+        header img {
+            max-height: 50px;
+            max-width: 100%;
+        }
+
+        header div {
+            display: flex;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2em;
+            margin-left: 10px; /* Adiciona um espaço entre a logo e o texto */
+        }
+
+        main {
+            display: flex;
+            margin-top: 80px; /* Ajuste de margem superior para evitar sobreposição com o cabeçalho fixo */
+        }
+
+        aside {
+            width: 200px;
+            background-color: #333;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+
+        aside a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        aside a:hover {
+            background-color: #555;
+        }
+
+        main section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #222;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 8px;
+            margin-bottom: 15px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #777;
+        }
+
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            clear: both;
+        }
+
+        /* Adiciona destaque visual aos títulos */
+        label[for="experiencia"],
+        label[for="educacao"],
+        label[for="cursos"] {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #fff;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #555;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <img src="../imagem/logo.png" alt="Logo IFPA">
+            <h1>Portal de Currículos</h1>
+        </div>
+        <nav>
+            <a href="../index.html">INÍCIO</a>
+            <a href="../sobre.html">SOBRE</a>
+            <a href="../perguntas_frequentes.html">PERGUNTAS FREQUENTES</a>
+            <a href="../login.html">SAIR</a>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <H3 style="text-align: center;">Empresa X</H3>
+            <a href="meu_perfil.html">Meu perfil</a>
+            <a href="notificacao.html">Notificações</a>
+            <a href="guia_cadastro.html">Guia para Cadastrar Estágio</a>
+            <a href="cadastrar_estagio.html">Cadastro Estágio</a>
+            <a href="atualizar_estagio.html">Atualizar Estagio</a>
+            <a href="pesquisar_estagiario.html">Pesquisar Estagiário</a>
+            <a href="cadastrar_contratado.html">Cadastro Contratados</a>
+            <a href="atualizar_contratado.html">Atualizar Contratados</a>
+            <a href="pesquisar_contratados.html">Pesquisar Contratados</a>
+            <!-- Adicione mais links conforme necessário -->
+        </aside>
+
+        <section>
+            <h2>Pesquisar Estagiários</h2>
+
+            <form>
+                <label for="filtro_curso">Filtrar por Curso:</label>
+                <select id="filtro_curso">
+                    <option value="todos">Todos os Cursos</option>
+                    <option value="ads">Análise e Desenvolvimento de Sistemas</option>
+                    <option value="si">Sistemas de Informação</option>
+                    <!-- Adicione mais opções de cursos conforme necessário -->
+                </select>
+
+                <label for="filtro_habilidade">Filtrar por Habilidade:</label>
+                <input type="text" id="filtro_habilidade" placeholder="Digite uma habilidade">
+
+                <button type="button" onclick="pesquisarEstagiarios()">Pesquisar</button>
+            </form>
+
+            <h2>Resultados da Pesquisa</h2>
+
+            <table>
+                <tr>
+                    <th>Nome</th>
+                    <th>Curso</th>
+                    <th>Habilidades</th>
+                </tr>
+                <!-- Estagiários fictícios -->
+                <tr>
+                    <td>João Silva</td>
+                    <td>Análise e Desenvolvimento de Sistemas</td>
+                    <td>Java, HTML, CSS</td>
+                </tr>
+                <tr>
+                    <td>Maria Oliveira</td>
+                    <td>Análise e Desenvolvimento de Sistemas</td>
+                    <td>Python, SQL, JavaScript</td>
+                </tr>
+                <!-- Adicione mais estagiários fictícios conforme necessário -->
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        © 2023 Portal de Currículos - IFPA. Todos os direitos reservados.
+    </footer>
+
+    <script>
+        function pesquisarEstagiarios() {
+            // Lógica de pesquisa aqui
+            alert("Lógica de pesquisa ainda não implementada. Esta é apenas uma demonstração.");
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Currículo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        header a {
+            margin-right: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, font-size 0.3s;
+        }
+
+        header a:hover {
+            color: #ffcc00;
+            font-size: 110%;
+        }
+
+        header img {
+            max-height: 50px;
+            max-width: 100%;
+        }
+
+        header div {
+            display: flex;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2em;
+            margin-left: 10px; /* Adiciona um espaço entre a logo e o texto */
+        }
+
+        main {
+            display: flex;
+            margin-top: 80px; /* Ajuste de margem superior para evitar sobreposição com o cabeçalho fixo */
+        }
+
+        aside {
+            width: 200px;
+            background-color: #333;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+
+        aside a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        aside a:hover {
+            background-color: #555;
+        }
+
+        main section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #222;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 8px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #777;
+        }
+
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            clear: both;
+        }
+
+        /* Adiciona destaque visual aos títulos */
+        label[for="experiencia"],
+        label[for="educacao"],
+        label[for="cursos"] {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <img src="../imagem/logo.png" alt="Logo IFPA">
+            <h1>Portal de Currículos</h1>
+        </div>
+        <nav>
+            <a href="../index.html">INÍCIO</a>
+            <a href="../sobre.html">SOBRE</a>
+            <a href="../perguntas_frequentes.html">PERGUNTAS FREQUENTES</a>
+            <a href="../login.html">SAIR</a>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <H3 style="text-align: center;">Aluno X</H3>
+            <a href="meu_perfil.html">Meu perfil</a>
+            <a href="notificacao.html">Notificações</a>
+            <a href="guia_cadastro.html">Guia para cadastrar currículo</a>
+            <a href="cadastrar_curriculo.html">Cadastro Currículo</a>
+            <a href="atualizar_curriculo.html">Atualizar Currículo</a>
+            <a href="pesquisar_estagio.html">Pesquisar Estágio</a>
+            <a href="dashboard.html">Dashboard</a>
+            <!-- Adicione mais links conforme necessário -->
+        </aside>
+
+        <section>
+            <h2>Cadastro de Currículo</h2>
+
+            <form action="/processar_cadastro.php" method="post">
+
+                <!-- Guia de Preenchimento -->
+                <div id="guia-preenchimento">
+                    <h3>Guia de Preenchimento - Cadastro de Currículo</h3>
+
+                    <p><strong>1. Informações Pessoais:</strong></p>
+                    <ul>
+                        <li><strong>Nome:</strong> Insira seu nome completo.</li>
+                        <li><strong>E-mail:</strong> Forneça um endereço de e-mail válido.</li>
+                        <li><strong>Telefone:</strong> Adicione seu número de telefone para contato.</li>
+                        <li><strong>Endereço:</strong> Informe seu endereço residencial.</li>
+                    </ul>
+
+                    <p><strong>2. Experiência Profissional:</strong></p>
+                    <ul>
+                        <li>Clique no botão "Adicionar Experiência" para incluir detalhes sobre sua experiência profissional.</li>
+                        <li>Para cada experiência, preencha:</li>
+                        <ul>
+                            <li><strong>Nome da Empresa:</strong> Nome da empresa onde trabalhou.</li>
+                            <li><strong>Cargo:</strong> Seu cargo ou função.</li>
+                            <li><strong>Tempo de Experiência em Anos:</strong> O período em anos que você passou na empresa.</li>
+                            <li><strong>Principais Funções:</strong> Descreva suas principais responsabilidades e realizações.</li>
+                        </ul>
+                    </ul>
+
+                    <p><strong>3. Educação:</strong></p>
+                    <ul>
+                        <li>Clique no botão "Adicionar Educação" para incluir detalhes sobre sua formação acadêmica.</li>
+                        <li>Para cada experiência educacional, preencha:</li>
+                        <ul>
+                            <li><strong>Faculdade/Universidade:</strong> Nome da instituição de ensino.</li>
+                            <li><strong>Curso:</strong> Nome do curso realizado.</li>
+                            <li><strong>Duração em Anos:</strong> O período em anos que durou o curso.</li>
+                            <li><strong>Início e Fim do Curso:</strong> Indique o ano de início e término do curso.</li>
+                        </ul>
+                    </ul>
+
+                    <p><strong>4. Cursos Adicionais:</strong></p>
+                    <ul>
+                        <li>Clique no botão "Adicionar Curso" para incluir informações sobre cursos complementares.</li>
+                        <li>Para cada curso, forneça:</li>
+                        <ul>
+                            <li><strong>Nome do Curso:</strong> Título do curso.</li>
+                            <li><strong>Duração em Horas:</strong> A carga horária do curso.</li>
+                            <li><strong>Status:</strong> Se o curso está concluído ou em andamento.</li>
+                        </ul>
+                    </ul>
+
+                    <p><strong>5. Habilidades:</strong></p>
+                    <ul>
+                        <li>Descreva suas habilidades em detalhes na área de texto fornecida. Destaque as competências que são relevantes para a posição desejada.</li>
+                    </ul>
+
+                    <p><strong>6. Envio do Currículo:</strong></p>
+                    <ul>
+                        <li>Após preencher todos os campos, clique no botão "Enviar Currículo" para submeter suas informações.</li>
+                    </ul>
+
+                    <p>Lembre-se de revisar cuidadosamente todas as informações antes de enviar o currículo. Informações precisas e bem apresentadas aumentam suas chances de se destacar para os potenciais empregadores.</p>
+
+                    <p>Obrigado por utilizar o Portal de Currículos - IFPA. Boa sorte em sua busca por oportunidades profissionais!</p>
+                </div>
+                <!-- Fim do Guia de Preenchimento -->
+
+        </section>
+    </main>
+
+    <footer>
+        © 2023 Portal de Currículos - IFPA. Todos os direitos reservados.
+    </footer>
+
+    <script>
+        function adicionarExperiencia() {
+            const experienciaContainer = document.getElementById("experiencia-container");
+
+            const novaExperiencia = document.createElement("div");
+
+            novaExperiencia.innerHTML = `
+                <label for="nome_empresa">Nome da Empresa:</label>
+                <input type="text" name="nome_empresa[]" required>
+
+                <label for="cargo">Cargo:</label>
+                <input type="text" name="cargo[]" required>
+
+                <label for="tempo_experiencia">Tempo de Experiência em Anos:</label>
+                <input type="number" name="tempo_experiencia[]" required>
+
+                <label for="principais_funcoes">Principais Funções:</label>
+                <textarea name="principais_funcoes[]" rows="4"></textarea>
+            `;
+
+            experienciaContainer.appendChild(novaExperiencia);
+        }
+
+        function adicionarEducacao() {
+            const educacaoContainer = document.getElementById("educacao-container");
+
+            const novaEducacao = document.createElement("div");
+
+            novaEducacao.innerHTML = `
+                <label for="faculdade">Faculdade/Universidade:</label>
+                <input type="text" name="faculdade[]" required>
+
+                <label for="curso">Curso:</label>
+                <input type="text" name="curso[]" required>
+
+                <label for="duracao_curso">Duração em Anos:</label>
+                <input type="number" name="duracao_curso[]" required>
+
+                <label for="inicio_fim_curso">Início e Fim do Curso:</label>
+                <input type="text" name="inicio_fim_curso[]" placeholder="Ex: 2018 - 2022" required>
+            `;
+
+            educacaoContainer.appendChild(novaEducacao);
+        }
+
+        function adicionarCurso() {
+            const cursosContainer = document.getElementById("cursos-container");
+
+            const novoCurso = document.createElement("div");
+
+            novoCurso.innerHTML = `
+                <label for="nome_curso">Nome do Curso:</label>
+                <input type="text" name="nome_curso[]" required>
+
+                <label for="duracao_curso">Duração em Horas:</label>
+                <input type="number" name="duracao_curso[]" required>
+
+                <label for="status_curso">Status:</label>
+                <select name="status_curso[]">
+                    <option value="Concluído">Concluído</option>
+                    <option value="Em Andamento">Em Andamento</option>
+                </select>
+            `;
+
+            cursosContainer.appendChild(novoCurso);
+        }
+    </script>
+
+</body>
+</html>

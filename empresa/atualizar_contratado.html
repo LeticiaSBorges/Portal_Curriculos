@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Currículo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        header a {
+            margin-right: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, font-size 0.3s;
+        }
+
+        header a:hover {
+            color: #ffcc00;
+            font-size: 110%;
+        }
+
+        header img {
+            max-height: 50px;
+            max-width: 100%;
+        }
+
+        header div {
+            display: flex;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2em;
+            margin-left: 10px; /* Adiciona um espaço entre a logo e o texto */
+        }
+
+        main {
+            display: flex;
+            margin-top: 80px; /* Ajuste de margem superior para evitar sobreposição com o cabeçalho fixo */
+        }
+
+        aside {
+            width: 200px;
+            background-color: #333;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+
+        aside a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        aside a:hover {
+            background-color: #555;
+        }
+
+        main section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #222;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 8px;
+            margin-bottom: 15px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #777;
+        }
+
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            clear: both;
+        }
+
+        /* Adicione destaque visual aos títulos */
+        label[for="experiencia"],
+        label[for="educacao"],
+        label[for="cursos"] {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        /* Estilo para itens da lista de vagas */
+        #listaVagas, #listaContratados {
+            list-style-type: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        #listaVagas, #listaContratados li {
+            margin-bottom: 5px;
+            background-color: #444;
+            padding: 5px;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        #listaVagas, #listaContratados li:hover {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <img src="../imagem/logo.png" alt="Logo IFPA">
+            <h1>Portal de Currículos</h1>
+        </div>
+        <nav>
+            <a href="../index.html">INÍCIO</a>
+            <a href="../sobre.html">SOBRE</a>
+            <a href="../perguntas_frequentes.html">PERGUNTAS FREQUENTES</a>
+            <a href="../login.html">SAIR</a>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <H3 style="text-align: center;">Empresa X</H3>
+            <a href="meu_perfil.html">Meu perfil</a>
+            <a href="notificacao.html">Notificações</a>
+            <a href="guia_cadastro.html">Guia para Cadastrar Estágio</a>
+            <a href="cadastrar_estagio.html">Cadastro Estágio</a>
+            <a href="atualizar_estagio.html">Atualizar Estagio</a>
+            <a href="pesquisar_estagiario.html">Pesquisar Estagiário</a>
+            <a href="cadastrar_contratado.html">Cadastro Contratados</a>
+            <a href="atualizar_contratado.html">Atualizar Contratados</a>
+            <a href="pesquisar_contratados.html">Pesquisar Contratados</a>
+            <!-- Adicione mais links conforme necessário -->
+        </aside>
+
+        <section>
+            <h2>Atualização de Contratado</h2>
+
+            <p>Para atualizar um contratado, siga os passos abaixo:</p>
+
+            <ol>
+                <li>Escolha o contratado na lista abaixo.</li>
+                <li>Preencha os campos que deseja atualizar.</li>
+                <li>Clique no botão "Atualizar Contratado".</li>
+                <li>Após o envio, os dados do contratado serão atualizados no sistema.</li>
+            </ol>
+
+            <!-- Lista de contratados - Substitua com dados reais do seu sistema -->
+            <ul id="listaContratados">
+                <li onclick="preencherCamposContratado('João Silva', '12345', 'joao.silva@email.com', '12')">João Silva</li>
+                <li onclick="preencherCamposContratado('Maria Oliveira', '67890', 'maria.oliveira@email.com', '24')">Maria Oliveira</li>
+                <!-- Adicione mais contratados conforme necessário -->
+            </ul>
+
+            <form action="/processar_atualizacao_contratado.php" method="post">
+                <label for="nome_contratado">Nome:</label>
+                <input type="text" id="nome_contratado" name="nome_contratado" required>
+
+                <label for="matricula_contratado">Matrícula:</label>
+                <input type="text" id="matricula_contratado" name="matricula_contratado" required>
+
+                <label for="email_contratado">E-mail:</label>
+                <input type="email" id="email_contratado" name="email_contratado" required>
+
+                <label for="tempo_contrato_contratado">Tempo de Contrato (em meses):</label>
+                <input type="number" id="tempo_contrato_contratado" name="tempo_contrato_contratado" required>
+
+                <input type="submit" value="Atualizar Contratado">
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        © 2023 Portal de Currículos - IFPA. Todos os direitos reservados.
+    </footer>
+
+    <script>
+        // Lista de contratados fictícios
+        const contratados = [
+            { nome: 'João Silva', matricula: '12345', email: 'joao.silva@email.com', tempoContrato: '12' },
+            { nome: 'Maria Oliveira', matricula: '67890', email: 'maria.oliveira@email.com', tempoContrato: '24' },
+            // Adicione mais contratados conforme necessário
+        ];
+
+        // Função para preencher automaticamente os campos do formulário
+        function preencherCamposContratado(nomeContratado) {
+            const contratadoSelecionado = contratados.find(c => c.nome === nomeContratado);
+
+            if (contratadoSelecionado) {
+                document.getElementById("nome_contratado").value = contratadoSelecionado.nome;
+                document.getElementById("matricula_contratado").value = contratadoSelecionado.matricula;
+                document.getElementById("email_contratado").value = contratadoSelecionado.email;
+                document.getElementById("tempo_contrato_contratado").value = contratadoSelecionado.tempoContrato;
+            }
+        }
+
+        // Função para adicionar experiência (mantive a função, mas você pode ajustar conforme necessário)
+        function adicionarExperiencia() {
+            const experienciaContainer = document.getElementById("experiencia-container");
+
+            const novaExperiencia = document.createElement("div");
+
+            novaExperiencia.innerHTML = `
+                <label for="nome_empresa">Nome da Empresa:</label>
+                <input type="text" name="nome_empresa[]" required>
+
+                <label for="cargo">Cargo:</label>
+                <input type="text" name="cargo[]" required>
+
+                <label for="tempo_experiencia">Tempo de Experiência em Anos:</label>
+                <input type="number" name="tempo_experiencia[]" required>
+
+                <label for="principais_funcoes">Principais Funções:</label>
+                <textarea name="principais_funcoes[]" rows="4"></textarea>
+            `;
+
+            experienciaContainer.appendChild(novaExperiencia);
+        }
+
+        // ... (outras funções que você precisar)
+
+        // Adicionando um listener para o evento submit do formulário
+        document.getElementById("atualizarContratadoForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            // Seu código de processamento aqui (envio para o backend, etc.)
+
+            alert('Contratado atualizado com sucesso!'); // Apenas um exemplo, substitua por sua lógica real
+        });
+    </script>
+
+</body>
+</html>

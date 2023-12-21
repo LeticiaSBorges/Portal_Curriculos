@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        header a {
+            margin-right: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, font-size 0.3s;
+        }
+
+        header a:hover {
+            color: #ffcc00;
+            font-size: 110%;
+        }
+
+        header img {
+            max-height: 50px;
+            max-width: 100%;
+        }
+
+        header div {
+            display: flex;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2em;
+            margin-left: 10px; /* Adiciona um espaço entre a logo e o texto */
+        }
+
+        main {
+            display: flex;
+            margin-top: 80px; /* Ajuste de margem superior para evitar sobreposição com o cabeçalho fixo */
+        }
+
+        aside {
+            width: 200px;
+            background-color: #333;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+
+        aside a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        aside a:hover {
+            background-color: #555;
+        }
+
+        main section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #222;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 8px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #777;
+        }
+
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            clear: both;
+        }
+
+        /* Adiciona destaque visual aos títulos */
+        label[for="experiencia"],
+        label[for="educacao"],
+        label[for="cursos"] {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        /*
+        section {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px;
+        }
+        */
+
+        .card {
+            background-color: #f4f4f4;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            max-width: 100%;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+        width: 100%;
+        margin-top: 10px;
+        border-collapse: collapse;
+        border: 1px solid #ddd;
+        color: #333; /* Cor do texto na tabela */
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:hover {
+            background-color: #ddd; /* Cor de destaque no hover */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <img src="../imagem/logo.png" alt="Logo IFPA">
+            <h1>Portal de Currículos</h1>
+        </div>
+        <nav>
+            <a href="../index.html">INÍCIO</a>
+            <a href="../sobre.html">SOBRE</a>
+            <a href="../perguntas_frequentes.html">PERGUNTAS FREQUENTES</a>
+            <a href="../login.html">SAIR</a>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <H3 style="text-align: center;">Aluno X</H3>
+            <a href="meu_perfil.html">Meu perfil</a>
+            <a href="notificacao.html">Notificações</a>
+            <a href="guia_cadastro.html">Guia para cadastrar currículo</a>
+            <a href="cadastrar_curriculo.html">Cadastro Currículo</a>
+            <a href="atualizar_curriculo.html">Atualizar Currículo</a>
+            <a href="pesquisar_estagio.html">Pesquisar Estágio</a>
+            <a href="dashboard.html">Dashboard</a>
+            <!-- Adicione mais links conforme necessário -->
+        </aside>
+    
+        <section style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+            <div class="card">
+                <h2>Comparativo entre Total de Cadastros e Total de Contratados</h2>
+                <canvas id="comparativoCadastrosContratados" style="max-width: 100%;"></canvas>
+            </div>
+    
+            <div class="card">
+                <h2>Cadastros por Gênero</h2>
+                <canvas id="cadastrosGenero" style="max-width: 100%;"></canvas>
+            </div>
+    
+            <div class="card">
+                <h2>Contratados por Gênero</h2>
+                <canvas id="contratadosGenero" style="max-width: 100%;"></canvas>
+            </div>
+    
+            <div class="card">
+                <h2>Tempo Médio de Contrato por Contratados</h2>
+                <canvas id="tempoContrato" style="max-width: 100%;"></canvas>
+            </div>
+    
+            <div class="card">
+                <h2>Habilidades Desejadas</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Habilidade</th>
+                            <th>Média por Currículos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="habilidadesTableBody"></tbody>
+                </table>
+            </div>
+    
+            <div class="card">
+                <h2>Cursos Desejados</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th>Média por Currículos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cursosTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+
+    <script>
+        const dadosDashboard = {
+            totalCadastros: 120,
+            totalContratados: 80,
+            cadastrosGenero: { masculino: 60, feminino: 60 },
+            contratadosGenero: { masculino: 40, feminino: 30 },
+            tempoContrato: [6, 9, 12, 15, 18], // Corrigido
+            habilidadesDesejadas: ['HTML', 'CSS', 'JavaScript', 'Python', 'React', 'Node.js', 'Angular', 'Vue.js'],
+            cursosDesejados: ['Análise e Desenvolvimento de Sistemas', 'Ciência de Dados', 'Engenharia de Software', 'Design Gráfico', 'Marketing Digital'],
+            quantidadeCursos: 20,
+            quantidadeHabilidades: 30
+        };
+
+        // Comparativo entre Total de Cadastros e Total de Contratados
+    new Chart(document.getElementById('comparativoCadastrosContratados'), {
+        type: 'bar',
+        data: {
+            labels: ['Total de Cadastros', 'Total de Contratados'],
+            datasets: [{
+                label: 'Comparativo',
+                data: [dadosDashboard.totalCadastros, dadosDashboard.totalContratados],
+                backgroundColor: ['#4CAF50', '#8BC34A'] // Tons de verde
+            }]
+        },
+        options: {
+            legend: { display: false },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        max: Math.max(dadosDashboard.totalCadastros, dadosDashboard.totalContratados) + 10
+                    }
+                }]
+            }
+        }
+    });
+
+    // Cadastros por Gênero
+    new Chart(document.getElementById('cadastrosGenero'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Masculino', 'Feminino'],
+            datasets: [{
+                data: [dadosDashboard.cadastrosGenero.masculino, dadosDashboard.cadastrosGenero.feminino],
+                backgroundColor: ['#4CAF50', '#8BC34A'] // Tons de verde
+            }]
+        },
+        options: {
+            legend: { display: false },
+        }
+    });
+
+    // Contratados por Gênero
+    new Chart(document.getElementById('contratadosGenero'), {
+        type: 'pie',
+        data: {
+            labels: ['Masculino', 'Feminino'],
+            datasets: [{
+                data: [dadosDashboard.contratadosGenero.masculino, dadosDashboard.contratadosGenero.feminino],
+                backgroundColor: ['#4CAF50', '#8BC34A'] // Tons de verde
+            }]
+        },
+        options: {
+            legend: { display: false },
+        }
+    });
+
+    // Tempo Médio de Contrato por Contratados
+    new Chart(document.getElementById('tempoContrato'), {
+        type: 'line',
+        data: {
+            labels: ['6 meses', '9 meses', '12 meses', '15 meses', '18 meses'],
+            datasets: [{
+                label: 'Tempo Médio de Contrato',
+                data: dadosDashboard.tempoContrato,
+                borderColor: '#4CAF50', // Verde
+                fill: false
+            }]
+        },
+        options: {
+            legend: { display: false },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        max: 20
+                    }
+                }]
+            }
+        }
+    });
+
+
+        // Habilidades Desejadas
+        const habilidadesTableBody = document.getElementById('habilidadesTableBody');
+        dadosDashboard.habilidadesDesejadas.forEach(habilidade => {
+            const media = Math.floor(Math.random() * 200);
+            const row = `<tr><td>${habilidade}</td><td>${media}</td></tr>`;
+            habilidadesTableBody.innerHTML += row;
+        });
+
+        // Cursos Desejados
+        const cursosTableBody = document.getElementById('cursosTableBody');
+        dadosDashboard.cursosDesejados.forEach(curso => {
+            const media = Math.floor(Math.random() * 200);
+            const row = `<tr><td>${curso}</td><td>${media}</td></tr>`;
+            cursosTableBody.innerHTML += row;
+        });
+    </script>
+
+</body>
+</html>

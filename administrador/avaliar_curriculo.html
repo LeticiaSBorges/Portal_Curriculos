@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa de Estagiários</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            text-align: right;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        header a {
+            margin-right: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, font-size 0.3s;
+        }
+
+        header a:hover {
+            color: #ffcc00;
+            font-size: 110%;
+        }
+
+        header img {
+            max-height: 50px;
+            max-width: 100%;
+        }
+
+        header div {
+            display: flex;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2em;
+            margin-left: 10px; /* Adiciona um espaço entre a logo e o texto */
+        }
+
+        main {
+            display: flex;
+            margin-top: 80px; /* Ajuste de margem superior para evitar sobreposição com o cabeçalho fixo */
+        }
+
+        aside {
+            width: 200px;
+            background-color: #333;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+
+        aside a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        aside a:hover {
+            background-color: #555;
+        }
+
+        main section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #222;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 8px;
+            margin-bottom: 15px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #777;
+        }
+
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            clear: both;
+        }
+
+        /* Adiciona destaque visual aos títulos */
+        label[for="experiencia"],
+        label[for="educacao"],
+        label[for="cursos"] {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #fff;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #555;
+            color: #fff;
+        }
+
+        /* Adiciona efeito de hover na tabela */
+        tr:hover {
+            background-color: #444;
+        }
+
+
+        /* Estilos adicionados para a seção de dados cadastrados */
+        section#dados-cadastrados{
+            max-width: 650px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #333;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        section#dados-cadastrados h2{
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        section#dados-cadastrados p {
+            margin-bottom: 10px;
+        }
+
+        /* Adição para garantir que as seções fiquem uma abaixo da outra */
+        main {
+            flex-direction: column; /* Alterado */
+        }
+
+        section {
+            width: 100%; /* Alterado */
+        }
+
+        /* Adição de estilos para as novas seções */
+        section#comentarios {
+            max-width: 650px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #333;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        section#comentarios h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        section#comentarios textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        section#comentarios button {
+            padding: 8px;
+            margin-bottom: 15px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        section#comentarios button:hover {
+            background-color: #777;
+        }
+
+        section#lista-comentarios {
+            max-width: 650px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #333;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        section#lista-comentarios h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        ul#lista {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li.comment {
+            border: 1px solid #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        li.comment button {
+            background-color: #555;
+            color: #fff;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        li.comment button:hover {
+            background-color: #777;
+        }
+
+        #filtro_nome {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    #filtro_nome, #filtro_habilidade {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <img src="../imagem/logo.png" alt="Logo IFPA">
+            <h1>Portal de Currículos</h1>
+        </div>
+        <nav>
+            <a href="../index.html">INÍCIO</a>
+            <a href="../sobre.html">SOBRE</a>
+            <a href="../perguntas_frequentes.html">PERGUNTAS FREQUENTES</a>
+            <a href="../login.html">SAIR</a>
+        </nav>
+    </header>
+
+    <main>
+        <aside>
+            <H3 style="text-align: center;">Administrador X</H3>
+            <a href="meu_perfil.html">Meu perfil</a>
+            <a href="avaliar_curriculo.html">Avaliar Currículos</a>
+            <a href="avaliar_estagios.html">Avaliar Estágios</a>
+            <!-- Adicione mais links conforme necessário -->
+        </aside>
+
+        <section>
+            <h2>Pesquisar Estagiários</h2>
+
+            <form>
+                <label for="filtro_nome">Filtrar por Nome:</label>
+                <input type="text" id="filtro_nome" placeholder="Digite o nome" oninput="filtrarPorNome()">
+
+                <label for="filtro_habilidade">Filtrar por Habilidade:</label>
+                <input type="text" id="filtro_habilidade" placeholder="Digite a habilidade" oninput="filtrarPorHabilidades()">
+
+                <button type="button" onclick="pesquisarEstagiarios()">Pesquisar</button>
+            </form>
+
+            <h2>Resultados da Pesquisa</h2>
+
+            <table>
+                <tr>
+                    <th>Nome</th>
+                    <th>Curso</th>
+                    <th>Habilidades</th>
+                    <th>Upload</th>
+                </tr>
+                <!-- Estagiários fictícios -->
+                <tr>
+                    <td>João Silva</td>
+                    <td id="educacao">Análise e Desenvolvimento de Sistemas</td>
+                    <td id="habilidade">Java, HTML, CSS</td>
+                    <td id="upload">
+                        <select>
+                            <option value="Sim">Sim</option>
+                            <option value="Não">Não</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Maria Oliveira</td>
+                    <td>Análise e Desenvolvimento de Sistemas</td>
+                    <td>Python, SQL, JavaScript</td>
+                        <td id="upload">
+                            <select>
+                                <option value="Sim">Sim</option>
+                                <option value="Não">Não</option>
+                            </select>
+                        </td>
+                </tr>
+                <!-- Adicione mais estagiários fictícios conforme necessário -->
+            </table>
+        </section>
+
+        <section id="dados-cadastrados">
+            <h2>Dados Cadastrados</h2>
+            <!-- Dados fictícios -->
+            <p><strong>Nome:</strong> <span id="nome"></span></p>
+            <p><strong>E-mail:</strong> <span id="email"></span></p>
+            <p><strong>Telefone:</strong> <span id="telefone"></span></p>
+            <p><strong>Endereço:</strong> <span id="endereco"></span></p>
+
+            <h3>Experiência Profissional</h3>
+            <ul id="experiencia-lista">
+                <!-- Lista de experiências profissionais será adicionada dinamicamente aqui -->
+            </ul>
+
+            <h3>Educação</h3>
+            <ul id="educacao-lista">
+                <!-- Lista de educação será adicionada dinamicamente aqui -->
+            </ul>
+
+            <h3>Habilidades</h3>
+            <p id="habilidades"></p>
+        </section>
+
+        <section id="comentarios">
+            <h2>Adicionar Comentário</h2>
+            <textarea id="comentario" rows="4" placeholder="Digite seu comentário"></textarea>
+            <button onclick="adicionarComentario()">Enviar</button>
+            <button onclick="limparComentario()">Cancelar</button>
+        </section>
+    
+        <section id="lista-comentarios">
+            <h2>Lista de Comentários</h2>
+            <ul id="lista">
+                <!-- Comentários serão adicionados dinamicamente aqui -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        © 2023 Portal de Currículos - IFPA. Todos os direitos reservados.
+    </footer>
+
+    <script>
+        
+        // Função para adicionar comentário
+        function adicionarComentario() {
+            const comentario = document.getElementById("comentario").value;
+
+            if (comentario.trim() !== "") {
+                const lista = document.getElementById("lista");
+                const novoComentario = document.createElement("li");
+                novoComentario.className = "comment";
+                novoComentario.innerHTML = `
+                    <p>${comentario}</p>
+                    <button onclick="editarComentario(this)">Editar</button>
+                    <button onclick="excluirComentario(this)">Excluir</button>
+                `;
+                lista.appendChild(novoComentario);
+
+                // Limpar a caixa de comentários após adicionar
+                limparComentario();
+            }
+        }
+
+        // Função para limpar a caixa de comentários
+        function limparComentario() {
+            document.getElementById("comentario").value = "";
+        }
+
+        // Função para editar comentário
+        function editarComentario(botao) {
+            const paragrafo = botao.parentNode.firstChild;
+            const novoComentario = prompt("Editar comentário:", paragrafo.innerText);
+
+            if (novoComentario !== null && novoComentario.trim() !== "") {
+                paragrafo.innerText = novoComentario;
+            }
+        }
+
+        // Função para excluir comentário
+        function excluirComentario(botao) {
+            const confirmacao = confirm("Deseja realmente excluir este comentário?");
+
+            if (confirmacao) {
+                const lista = document.getElementById("lista");
+                lista.removeChild(botao.parentNode);
+            }
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////
+        // Função para preencher a seção "dados-cadastrados" com os dados da linha selecionada
+        function preencherDadosCadastrados(nome, curso, habilidades) {
+            // Preencher os campos
+            document.getElementById("nome").innerText = nome;
+            document.getElementById("email").innerText = "seu_email@exemplo.com"; // Substitua com um e-mail fictício
+            document.getElementById("telefone").innerText = "123-456-7890"; // Substitua com um telefone fictício
+            document.getElementById("endereco").innerText = "Rua XYZ, Cidade ABC"; // Substitua com um endereço fictício
+
+            // Preencher a lista de experiências profissionais
+            const experienciaLista = document.getElementById("experiencia-lista");
+            experienciaLista.innerHTML = ""; // Limpar a lista antes de adicionar novos itens
+            const experienciaFicticia = { nomeEmpresa: "Empresa X", cargo: "Desenvolvedor", tempo: "2 anos" };
+            const itemExperiencia = document.createElement("li");
+            itemExperiencia.innerText = `${experienciaFicticia.nomeEmpresa} - ${experienciaFicticia.cargo} (${experienciaFicticia.tempo})`;
+            experienciaLista.appendChild(itemExperiencia);
+
+            // Preencher a lista de educação
+            const educacaoLista = document.getElementById("educacao-lista");
+            educacaoLista.innerHTML = ""; // Limpar a lista antes de adicionar novos itens
+            const educacaoFicticia = { instituicao: "Instituto Federal do Pará - IFPA", curso: curso, duracao: "4 anos" };
+            const itemEducacao = document.createElement("li");
+            itemEducacao.innerText = `${educacaoFicticia.instituicao} - ${educacaoFicticia.curso} (${educacaoFicticia.duracao})`;
+            educacaoLista.appendChild(itemEducacao);
+
+            // Preencher habilidades
+            document.getElementById("habilidades").innerText = habilidades;
+        }
+
+        // Adicionar evento de clique às linhas da tabela
+        const linhasTabela = document.querySelectorAll("table tr");
+        linhasTabela.forEach((linha) => {
+            linha.addEventListener("click", () => {
+                // Obter dados da linha
+                const nome = linha.cells[0].innerText;
+                const curso = linha.cells[1].innerText;
+                const habilidades = linha.cells[2].innerText.split(", ").join(", "); // Tratar as habilidades
+
+                // Preencher a seção "dados-cadastrados" com os dados da linha selecionada
+                preencherDadosCadastrados(nome, curso, habilidades);
+            });
+        });
+
+        ////////////////////////////////////////////////////////////////////////////////
+        
+    // Função para filtrar a tabela por nome
+    function filtrarPorNome() {
+        const inputNome = document.getElementById("filtro_nome");
+        const filtro = inputNome.value.toUpperCase();
+        const tabela = document.querySelector("table");
+        const linhas = tabela.querySelectorAll("tr");
+
+        // Itera sobre as linhas da tabela (ignora a primeira, que é a cabeçalho)
+        for (let i = 1; i < linhas.length; i++) {
+            const colunaNome = linhas[i].getElementsByTagName("td")[0];
+
+            // Verifica se o texto na coluna de nome contém o filtro
+            if (colunaNome) {
+                const textoNome = colunaNome.textContent || colunaNome.innerText;
+                if (textoNome.toUpperCase().indexOf(filtro) > -1) {
+                    linhas[i].style.display = "";
+                } else {
+                    linhas[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////
+    // Função para filtrar a tabela por habilidades
+    function filtrarPorHabilidades() {
+        const inputHabilidades = document.getElementById("filtro_habilidade");
+        const filtroHabilidades = inputHabilidades.value.toUpperCase();
+        const tabela = document.querySelector("table");
+        const linhas = tabela.querySelectorAll("tr");
+
+        // Itera sobre as linhas da tabela (ignora a primeira, que é a cabeçalho)
+        for (let i = 1; i < linhas.length; i++) {
+            const colunaHabilidades = linhas[i].getElementsByTagName("td")[2];
+
+            // Verifica se o texto na coluna de habilidades contém o filtro
+            if (colunaHabilidades) {
+                const textoHabilidades = colunaHabilidades.textContent || colunaHabilidades.innerText;
+                if (textoHabilidades.toUpperCase().indexOf(filtroHabilidades) > -1) {
+                    linhas[i].style.display = "";
+                } else {
+                    linhas[i].style.display = "none";
+                }
+            }
+        }
+    }
+   
+    </script>
+
+</body>
+</html>
